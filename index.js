@@ -16,7 +16,7 @@ app.use(cors(corsConfig))
 app.options("", cors(corsConfig))
 app.use(express.json())
 
-
+// chake server site ranning
 app.get('/', (req, res) => {
     res.send('supper herro server site is ranning')
 })
@@ -39,9 +39,10 @@ async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
 
+        // user collection
         const jobTask = client.db("job-task").collection("supperHero");
 
-
+        // supper hero data post 
         app.post('/supperHero', async (req, res) => {
             const query = req.body;
             query.heroId = parseInt(req.body.heroId)
@@ -54,6 +55,7 @@ async function run() {
             res.send(result)
         })
 
+        // specific data get 
         app.get('/supperHero', async (req, res) => {
             let query = {}
             if(req.query?.heroId){
@@ -63,6 +65,7 @@ async function run() {
             res.send(result)
         })
 
+        // all herro data get 
         app.get('/supperHeroAllData', async (req, res) => {
             const result = await jobTask.find().toArray()
             res.send(result)
