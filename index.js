@@ -38,10 +38,8 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
-        // await client.connect();
 
         const jobTask = client.db("job-task").collection("supperHero");
-        // const interviewr = client.db("job-task").collection("interviewr");
 
 
         app.post('/supperHero', async (req, res) => {
@@ -65,17 +63,10 @@ async function run() {
             res.send(result)
         })
 
-        // app.post('/interviewrHero', async (req, res) => {
-        //     const query = req.body;
-        //     query.heroId = parseInt(req.body.heroId)
-        //     query.strength = parseInt(req.body.strength)
-        //     query.invisibility = parseInt(req.body.invisibility)
-        //     query.healing = parseInt(req.body.healing)
-        //     query.shape = parseInt(req.body.shape)
-        //     query.telekinesis = parseInt(req.body.telekinesis)
-        //     const result = await interviewr.insertOne(query)
-        //     res.send(result)
-        // })
+        app.get('/supperHeroAllData', async (req, res) => {
+            const result = await jobTask.find().toArray()
+            res.send(result)
+        })
 
 
         // Send a ping to confirm a successful connection
